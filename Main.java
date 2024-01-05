@@ -71,9 +71,5 @@ public class Main {
             System.out.print("Invalid. Again: ");
         }
     }
-//    atm.insertCoin(200);
-//    atm.insertCoin(300);
-//    atm.select(1);
-
     }
 }
