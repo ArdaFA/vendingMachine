@@ -26,9 +26,11 @@ public class Automat {
 
     // Ware Information
     public void printWare(){
+        System.out.println("****************************");
         for(int i = 0 ; i < this.getWares().length; i++){
             System.out.println("ID: " + this.getWares()[i].getID() + ", Name: " + this.getWares()[i].getName() + ", Price: " + this.getWares()[i].getPrice());
         }
+        System.out.println("****************************");
     }
 
     // versucht dann die Ware mit der ID des übergebenen Wertes zu kaufen
@@ -97,101 +99,23 @@ public class Automat {
 
         int selectedPrice = selectedWare.getPrice();
         if(selectedPrice <= currentCoins){
-            // buys
-            System.out.println("Customer has enough money to buy it.");
-            System.out.println("Bought!");
-
-
-            // currentCoin -= price
-            for (int i = 0; i < this.getMs().getCurrentCoins().length; i++){
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
+            this.getMs().buy(currentCoins);
             return true;
         }
         else{
-            System.out.println("Customer do not have enough money to pay");
+            System.out.println("You do not have enough credits to buy " + selectedWare.getName());
             return false;
         }
-
-
 
     }
 
     public boolean insertCoin(int coin){
-        // check if the coin is valid
-        for(int i = 0; i < this.getMs().getValidCoins().length; i++){
-            // yes, the coin is valid
-            if(this.getMs().getValidCoins()[i] == coin){
-                // add the coin in current coins
-                int oldCur = this.getMs().getCurrentCoins()[i];
-                this.getMs().getCurrentCoins()[i] = oldCur + 1;
-
-                // add the coin in inserted coins
-                int oldIns = this.getMs().getInsertedCoins()[i];
-                this.getMs().getInsertedCoins()[i] = oldCur + 1;
-
-                return true;
-            }
-        }
-        return false;
+        return this.getMs().insert(coin);
     }
 
     // do cancel
     public void abort(){
-
-        for(int i = 0; i < this.getMs().getCurrentCoins().length; i++){
-
-            // coin = 1
-            if(i == 0){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 1 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 2
-            else if(i == 1){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 2 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 5
-            else if(i == 2){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 5 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 10
-            else if(i == 3){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 10 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 20
-            else if(i == 4){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 20 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 50
-            else if(i == 5){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 50 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 100
-            else if(i == 6){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 100 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-
-            // coin = 200
-            else if(i == 7){
-                System.out.println("Customer got " + this.getMs().getCurrentCoins()[i] + " pieces 200 cent back!");
-                this.getMs().getCurrentCoins()[i] = 0;
-            }
-        }
+        this.getMs().reset();
     }
-
-
-
 
 }
