@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
 
+    // create coin system
     Muenzsystem ms = new Muenzsystem();
     Ware water = new Ware(1, "Water", 150);
     Ware sWater = new Ware(2, "Sparkling Water", 150);
@@ -12,6 +13,8 @@ public class Main {
     Ware chips = new Ware(5, "Lay's", 250);
     Ware peanut = new Ware(6, "Mix-Nuts", 125);
     Ware sand = new Ware(7, "Chicken Sandwich", 350);
+
+    // add items
     Ware[] wares = {
             water,
             sWater,
@@ -24,10 +27,13 @@ public class Main {
 
     Automat atm = new Automat(ms, wares);
 
+    // print information
     atm.printWare();
 
 
     boolean shouldStop = false;
+
+    // run
     while(!shouldStop){
         System.out.println("Your credit: " + atm.getMs().totalCredit() + " cents");
         System.out.print("""
